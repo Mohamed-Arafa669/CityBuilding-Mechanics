@@ -9,17 +9,9 @@
 void ACB_Controller::BeginPlay()
 {
 	Super::BeginPlay();
-// 	SetPlacementModeEnabled(true);
+	UpdateBuilding();
 }
 
-void ACB_Controller::PlayerTick(float DeltaTime)
-{
-	Super::PlayerTick(DeltaTime);
-	if (bPlacementModeEnabled)
-	{
-		UpdatePlacement();
-	}
-}
 
 void ACB_Controller::SetPlacementModeEnabled(bool inIsEnabled)
 {
@@ -75,6 +67,22 @@ void ACB_Controller::UpdatePlacement()
 			PlaceableActor->SetActorLocation(HitResult.Location);
 		}
 	}
+}
+
+void ACB_Controller::UpdateFunction()
+{
+	if (bPlacementModeEnabled)
+	{
+		UpdatePlacement();
+	}
+
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::UpdateBuilding, 0.05f, false);
+}
+
+void ACB_Controller::UpdateBuilding()
+{
+	UpdateFunction();
 }
 
 void ACB_Controller::SpawnBuilding()

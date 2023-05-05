@@ -17,8 +17,9 @@ class CITYBUILDING_API ACB_Controller : public APlayerController
 protected:
 
 	virtual void BeginPlay() override;
-	virtual void PlayerTick(float DeltaTime);
 	void UpdatePlacement();
+
+	
 	UFUNCTION()
 		void TraceFunction(FHitResult& TraceHitResult);
 
@@ -38,7 +39,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UActorComponent> PlaceableComponentClass;
 
+private:
 
+	UFUNCTION()
+		void UpdateFunction();
+	UFUNCTION()
+		void UpdateBuilding();
 
 public:
 
